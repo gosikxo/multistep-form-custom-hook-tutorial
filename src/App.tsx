@@ -1,3 +1,4 @@
+import { FormEvent } from "react"
 import { AccountForm } from "./AccountForm"
 import { AddressForm } from "./AddressForm"
 import { useMultistepForm } from "./useMultistepForm"
@@ -9,7 +10,10 @@ function App() {
     <AddressForm />,
     <AccountForm />
   ])
-
+  function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    next()
+  }
   return (
     <div style={{
       position: "relative",
@@ -20,7 +24,7 @@ function App() {
       borderRadius: ".5rem",
       fontFamily: "Arial"
     }}>
-      <form>
+      <form onSubmit={onSubmit}>
         <div style={{
           position: "absolute",
           top: ".5rem",
@@ -40,7 +44,7 @@ function App() {
             <button type="button" onClick={back}>
               Back
             </button>}
-          <button type="button" onClick={next}>
+          <button type="submit">
             {isLastStep ? "Finish" : "Next"}
           </button>
         </div>
